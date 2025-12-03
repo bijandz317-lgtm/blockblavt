@@ -5,14 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BlockBlast — Pro Edition</title>
 
-<!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-/* ===========================================================
-   THEME + BASE
-   ===========================================================
-*/
+
 :root{
   --bg-a: #071026;
   --bg-b: #0b2a45;
@@ -20,7 +16,7 @@
   --accent: #4fd1ff;
   --accent-2: #2b9fe6;
   --muted: rgba(255,255,255,0.7);
-  --cell-size: 50px; /* main cell size */
+  --cell-size: 50px; 
   --gap: 14px;
   --card-radius: 14px;
   --shadow-strong: 0 18px 50px rgba(2,6,23,0.6);
@@ -33,24 +29,24 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background: radial-gradient(900px 400px at 10% 8%, rgba(79,209,255,0.04), transparent 6%), linear-gradient(180deg,var(--bg-a),var(--bg-b)); color:var(--text); font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
 
-/* Container */
+
 .container{max-width:1180px;margin:28px auto;padding:18px;display:flex;gap:20px;align-items:flex-start;justify-content:center}
 .left{flex:1;min-width:560px}
 .right{width:360px}
 
-/* Card */
+
 .card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:var(--card-radius); padding:14px; box-shadow: var(--shadow-strong);}
 
-/* Header */
+
 .header-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .brand{display:flex;flex-direction:column}
 .brand h1{margin:0;font-size:20px;color:var(--accent)}
 .brand p{margin:2px 0 0;font-size:12px;color:var(--muted)}
 
-/* board panel */
+
 .boardWrap{margin-top:12px; padding:14px;border-radius:12px;background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));}
 
-/* board grid: responsive cell size using CSS var */
+
 #board{
   display:grid;
   grid-template-columns: repeat(9, var(--cell-size));
@@ -58,14 +54,14 @@ html,body{height:100%;margin:0;background: radial-gradient(900px 400px at 10% 8%
   gap: var(--gap);
   padding:12px;
   border-radius:12px;
-  width: calc(9 * var(--cell-size) + 8 * var(--gap) + 24px); /* padding compensation */
+  width: calc(9 * var(--cell-size) + 8 * var(--gap) + 24px); 
   margin: 0 auto;
   background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
   position:relative;
   transition: filter 220ms ease, transform 220ms ease;
 }
 
-/* Cells: grid lines, glow, filled */
+
 .cell{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
   border-radius:10px;
@@ -76,44 +72,44 @@ html,body{height:100%;margin:0;background: radial-gradient(900px 400px at 10% 8%
 }
 .cell::after{ content:''; position:absolute; inset:0; border-radius:10px; pointer-events:none; }
 
-/* gridline stronger */
+
 .cell.gridline{ border: 1px solid rgba(255,255,255,0.08); }
 
-/* highlight preview */
+
 .cell.preview{
   box-shadow: 0 18px 50px rgba(79,209,255,0.08), inset 0 6px 18px rgba(79,209,255,0.04);
   transform: translateY(-6px);
 }
 
-/* filled cell style: gradient and soft shadow */
+
 .cell.filled{
   background: linear-gradient(180deg,var(--accent),var(--accent-2));
   box-shadow: 0 12px 38px rgba(43,159,230,0.20), inset 0 6px 12px rgba(255,255,255,0.06);
   transform: translateY(0);
 }
 
-/* pop animation on place */
+
 @keyframes pop { 0%{ transform: scale(.6); } 70%{ transform: scale(1.08); } 100%{ transform: scale(1); } }
 .cell.pop{
   animation: pop 260ms cubic-bezier(.2,.9,.2,1);
 }
 
-/* explode animation when clearing */
+
 @keyframes explode { to{ transform: scale(1.8); opacity:0; } }
 .cell.explode{
   animation: explode 360ms ease-out forwards;
 }
 
-/* flash entire board */
+
 .flash { animation: flashBoard 360ms ease; }
 @keyframes flashBoard { 0%{ filter:brightness(2) } 100%{ filter:brightness(1) } }
 
-/* particle container */
+
 #particleLayer {
   position: absolute; left:0; top:0; right:0; bottom:0; pointer-events:none; overflow:visible; z-index:60;
 }
 
-/* slot area (right pane) */
+
 .slots{display:flex;gap:12px;justify-content:center;padding:10px}
 .slot{min-width:110px;padding:12px;border-radius:12px;background:var(--ui-0);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:transform 120ms, opacity 140ms}
 .slot.empty{opacity:0.2; pointer-events:none; transform:scale(.98)}
@@ -121,22 +117,22 @@ html,body{height:100%;margin:0;background: radial-gradient(900px 400px at 10% 8%
 .previewRow{display:flex;gap:6px;justify-content:center}
 .previewCell{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.04)}
 
-/* ghost */
+
 .ghost{
   position:fixed; z-index:80; pointer-events:none; transform:translate(-50%,-50%) scale(1.04); filter:drop-shadow(0 18px 40px rgba(0,0,0,0.45));
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:8px; border-radius:10px; will-change: transform;
 }
 
-/* UI controls */
+
 .statRow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .statLabel{font-size:13px;color:var(--muted)}
 .statValue{font-weight:800;color:var(--accent);font-size:20px}
 
-/* buttons */
+
 .btn{background:var(--accent);border:none;padding:8px 12px;border-radius:10px;color:#031018;font-weight:700;cursor:pointer}
 .btnGhost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--text);cursor:pointer}
 
-/* Overlay gameover */
+
 .overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.6));display:flex;align-items:center;justify-content:center;z-index:120;backdrop-filter: blur(4px);opacity:0;pointer-events:none;transition:opacity 180ms ease}
 .overlay.show{opacity:1;pointer-events:auto}
 .overlayPanel{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06)); padding:20px;border-radius:12px;text-align:center;min-width:320px}
@@ -152,7 +148,7 @@ html,body{height:100%;margin:0;background: radial-gradient(900px 400px at 10% 8%
 
 .ghost{ will-change: transform; }
 
-/* small responsive */
+
 @media (max-width:980px){
   .container{flex-direction:column;padding:12px}
   .right{width:100%}
@@ -257,14 +253,14 @@ html,body{height:100%;margin:0;background: radial-gradient(900px 400px at 10% 8%
    ===========================================================
 */
 
-/* -------------------- CONFIG -------------------- */
+
 const ROWS = 9, COLS = 9;
 const POINT_CELL = 7;
 const POINT_LINE = 100;
 const PERFECT_BONUS = 150;
 const FULL_CLEAR_BONUS = 500;
 
-/* palettes (board bg + block color) */
+
 const PALETTES = [
   {bg0:'#071026', bg1:'#0b2a45', block:'#4D96FF'},
   {bg0:'#061e13', bg1:'#133a24', block:'#6BCB77'},
@@ -274,7 +270,7 @@ const PALETTES = [
   {bg0:'#02131a', bg1:'#072836', block:'#32c5ff'}
 ];
 
-/* shapes list (a superset for variety) */
+
 const SHAPES = [
   [[1]],
   [[1,1]],
@@ -288,19 +284,14 @@ const SHAPES = [
   [[1,1,0],[0,1,1]],
   [[1,1,1,1]],
   [[1],[1],[1],[1]],
-  [[1,0,0],[1,1,1]], // L long
-  [[0,1,0],[1,1,1]], // T already
-  [[1,0],[1,0],[1,1]] // L vertical
-];
+  [[1,0,0],[1,1,1]],   [[0,1,0],[1,1,1]],   [[1,0],[1,0],[1,1]] ];
 
-/* -------------------- STATE -------------------- */
-let grid = []; // 2D grid 0/1
-let pieces = []; // [{shape:[], used:false}, ...] length 3
-let score = 0, combo = 1;
+
+let grid = []; let pieces = []; let score = 0, combo = 1;
 let best = Number(localStorage.getItem('bb_best_pro_v2') || 0);
 let currentPalette = PALETTES[0];
 
-/* UI elements */
+
 const BOARD = document.getElementById('board');
 const SLOTS = document.getElementById('slots');
 const SCORE_EL = document.getElementById('scoreVal');
@@ -309,29 +300,27 @@ const COMBO_EL = document.getElementById('comboVal');
 const OVERLAY = document.getElementById('overlay');
 const PARTICLE_LAYER = document.getElementById('particleLayer');
 
-/* audio placeholders (empty by default) */
+
 const S_PLACE = document.getElementById('sPlace');
 const S_CLEAR = document.getElementById('sClear');
 const S_COMBO = document.getElementById('sCombo');
 
-/* drag state */
-let ghost = null;
-let dragInfo = null; // {idx, shape}
-let pointerMoveHandler = null, pointerUpHandler = null;
 
-/* -------------------- UTIL -------------------- */
+let ghost = null;
+let dragInfo = null; let pointerMoveHandler = null, pointerUpHandler = null;
+
+
 function rand(n){ return Math.floor(Math.random()*n); }
 function pick(a){ return a[rand(a.length)]; }
 function clone(x){ return JSON.parse(JSON.stringify(x)); }
 
-/* -------------------- INITIALIZE -------------------- */
+
 function initGrid(){
   grid = Array.from({length:ROWS}, ()=>Array(COLS).fill(0));
 }
 function buildBoardDOM(){
   BOARD.innerHTML = '';
-  // create cells
-  for(let r=0;r<ROWS;r++){
+    for(let r=0;r<ROWS;r++){
     for(let c=0;c<COLS;c++){
       const cell = document.createElement('div');
       cell.className = 'cell gridline';
@@ -339,8 +328,7 @@ function buildBoardDOM(){
       BOARD.appendChild(cell);
     }
   }
-  // particle layer sits on top
-  const pLayer = document.createElement('div');
+    const pLayer = document.createElement('div');
   pLayer.id = 'particleLayer';
   BOARD.appendChild(pLayer);
 }
@@ -359,16 +347,13 @@ function renderGrid(){
   }
 }
 
-/* -------------------- Palette -------------------- */
+
 function applyPalette(p){
   currentPalette = p;
-  // set CSS variables for gradients and block look
-  document.documentElement.style.setProperty('--bg-a', p.bg0);
+    document.documentElement.style.setProperty('--bg-a', p.bg0);
   document.documentElement.style.setProperty('--bg-b', p.bg1);
-  // set accent to block color for UI
-  document.documentElement.style.setProperty('--accent', p.block);
-  // create a darker stop for gradient
-  function shade(hex, pct){
+    document.documentElement.style.setProperty('--accent', p.block);
+    function shade(hex, pct){
     const f = hex.slice(1);
     const R = parseInt(f.substring(0,2),16), G = parseInt(f.substring(2,4),16), B = parseInt(f.substring(4,6),16);
     const t = pct<0?0:255; const p2=Math.abs(pct)/100;
@@ -379,13 +364,12 @@ function applyPalette(p){
   }
   const darker = shade(p.block, -22);
   document.documentElement.style.setProperty('--accent-2', darker);
-  // update existing mini previews
-  document.querySelectorAll('.previewCell').forEach(el=>{
+    document.querySelectorAll('.previewCell').forEach(el=>{
     if (el.dataset.filled === '1') el.style.background = p.block;
   });
 }
 
-/* -------------------- PIECES: generate + render -------------------- */
+
 function genPiece(){ return clone(pick(SHAPES)); }
 
 function generatePieces(){
@@ -397,7 +381,7 @@ function generatePieces(){
   renderPieces();
 }
 
-/* render three slots */
+
 function renderPieces(){
   SLOTS.innerHTML = '';
   pieces.forEach((p, idx)=>{
@@ -414,8 +398,7 @@ function renderPieces(){
 
     const preview = document.createElement('div');
     preview.className = 'previewGrid';
-    // grid columns = columns in shape
-    const cols = Math.max(...p.shape.map(r => r.length));
+        const cols = Math.max(...p.shape.map(r => r.length));
     preview.style.gridTemplateColumns = `repeat(${cols}, auto)`;
 
     p.shape.forEach(row=>{
@@ -438,8 +421,7 @@ function renderPieces(){
 
     slot.appendChild(preview);
 
-    // pointerdown starts drag
-    slot.addEventListener('pointerdown', (ev)=>{
+        slot.addEventListener('pointerdown', (ev)=>{
       ev.preventDefault();
       if (p.used) return;
       startDrag(ev, idx);
@@ -449,17 +431,15 @@ function renderPieces(){
   });
 }
 
-/* -------------------- DRAG / GHOST -------------------- */
+
 function startDrag(ev, idx){
   dragInfo = { idx, shape: clone(pieces[idx].shape) };
-  // build ghost
-  ghost = document.createElement('div');
+    ghost = document.createElement('div');
   ghost.className = 'ghost';
   ghost.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))';
   ghost.style.padding = '8px';
   ghost.style.borderRadius = '10px';
-  // draw shape inside ghost
-  dragInfo.shape.forEach(row=>{
+    dragInfo.shape.forEach(row=>{
     const rEl = document.createElement('div');
     rEl.style.display='flex'; rEl.style.gap='6px'; rEl.style.justifyContent='center';
     row.forEach(cell=>{
@@ -475,8 +455,7 @@ function startDrag(ev, idx){
   document.body.appendChild(ghost);
   moveGhost(ev);
 
-  // attach pointer move/up
-  pointerMoveHandler = (e)=>{ moveGhost(e); updatePreviewGlow(e); };
+    pointerMoveHandler = (e)=>{ moveGhost(e); updatePreviewGlow(e); };
   pointerUpHandler = (e)=>{ finishDrag(e); document.removeEventListener('pointermove', pointerMoveHandler); document.removeEventListener('pointerup', pointerUpHandler); };
   document.addEventListener('pointermove', pointerMoveHandler);
   document.addEventListener('pointerup', pointerUpHandler);
@@ -501,39 +480,33 @@ function finishDrag(e){
   const idx = dragInfo.idx;
   const placed = tryPlaceAt(dragInfo.shape, r, c, idx);
 
-  // remove ghost
-  if (ghost){ ghost.remove(); ghost = null; }
+    if (ghost){ ghost.remove(); ghost = null; }
   dragInfo = null;
   clearAllPreview();
-  // after placement actions
-  if (placed){
-    // if all used, generate new after short delay
-    if (pieces.every(p=>p.used || !p.shape || p.shape.length ===0)){
+    if (placed){
+        if (pieces.every(p=>p.used || !p.shape || p.shape.length ===0)){
       setTimeout(()=>{ generatePieces(); checkGameOver(); }, 300);
     } else {
       setTimeout(()=> checkGameOver(), 120);
     }
   } else {
-    // nothing placed, still check nothing
-    setTimeout(()=> checkGameOver(), 120);
+        setTimeout(()=> checkGameOver(), 120);
   }
 }
 
-/* allow click-to-place too: click slot then click board */
+
 let selectedSlot = null;
 SLOTS.addEventListener('click', (ev)=>{
   const slot = ev.target.closest('.slot');
   if (!slot) return;
   const idx = Number(slot.dataset.idx);
   if (pieces[idx] && !pieces[idx].used && pieces[idx].shape.length) {
-    // toggle selection
-    if (selectedSlot === idx){
+        if (selectedSlot === idx){
       selectedSlot = null;
       clearAllPreview();
     } else {
       selectedSlot = idx;
-      // attach click handler to board overlay
-    }
+          }
   }
 });
 BOARD.addEventListener('click', (ev)=>{
@@ -556,7 +529,7 @@ BOARD.addEventListener('click', (ev)=>{
   } else setTimeout(()=> checkGameOver(), 120);
 });
 
-/* -------------------- PREVIEW / GLOW -------------------- */
+
 function clearAllPreview(){
   document.querySelectorAll('.cell.preview').forEach(el=>el.classList.remove('preview','glow'));
 }
@@ -572,8 +545,7 @@ function updatePreviewGlow(e){
   clearAllPreview();
   const s = dragInfo.shape;
   if (!s) return;
-  // validate
-  let valid = true;
+    let valid = true;
   for(let i=0;i<s.length;i++){
     for(let j=0;j<s[0].length;j++){
       if (s[i][j]===1){
@@ -596,10 +568,9 @@ function updatePreviewGlow(e){
   }
 }
 
-/* -------------------- PLACEMENT / SCORING / CLEARING -------------------- */
+
 function tryPlaceAt(shape, r, c, pieceIndex){
-  // validate
-  for(let i=0;i<shape.length;i++){
+    for(let i=0;i<shape.length;i++){
     for(let j=0;j<shape[0].length;j++){
       if (shape[i][j]===1){
         const rr=r+i, cc=c+j;
@@ -609,8 +580,7 @@ function tryPlaceAt(shape, r, c, pieceIndex){
     }
   }
 
-  // place + fall animation: we'll mark grid occupied and animate a drop effect
-  const placedEls = [];
+    const placedEls = [];
   for(let i=0;i<shape.length;i++){
     for(let j=0;j<shape[0].length;j++){
       if (shape[i][j]===1){
@@ -618,62 +588,47 @@ function tryPlaceAt(shape, r, c, pieceIndex){
         grid[rr][cc] = 1;
         const el = BOARD.children[rr*COLS + cc];
         if (el){
-          // simulate fall: start with translateY(-120px) and animate to 0
-          el.style.transition = 'none';
+                    el.style.transition = 'none';
           el.style.transform = 'translateY(-120px) scale(.92)';
-          // force reflow
-          void el.offsetWidth;
+                    void el.offsetWidth;
           el.classList.add('filled','pop');
           el.style.transition = 'transform 420ms cubic-bezier(.18,.9,.3,1), box-shadow 260ms';
           el.style.transform = 'translateY(0) scale(1)';
           placedEls.push(el);
-          // cleanup pop class later
-          setTimeout(()=> el.classList.remove('pop'), 420);
+                    setTimeout(()=> el.classList.remove('pop'), 420);
         }
       }
     }
   }
 
-  // scoring: placed cells * POINT_CELL
-  const placedCount = shape.flat().reduce((a,b)=>a+b,0);
+    const placedCount = shape.flat().reduce((a,b)=>a+b,0);
   score += placedCount * POINT_CELL;
 
-  // mark piece used & remove shape so it cannot be reused
-  pieces[pieceIndex].used = true;
+    pieces[pieceIndex].used = true;
   pieces[pieceIndex].shape = [];
   renderPieces();
   renderGrid();
 
-  // detect lines now
-  const {rows, cols, total} = detectLines();
+    const {rows, cols, total} = detectLines();
   if (total > 0){
-    // compute base line points and multiplier
-    let baseLinePoints = total * POINT_LINE;
-    // multiplier: x2 if 2 lines cleared, x3 if 3, etc.
-    let multiplier = Math.max(1, total);
-    // perfect bonus if both row(s) and col(s) cleared simultaneously
-    const perfect = (rows.length > 0 && cols.length > 0);
-    // animate clears
-    animateClear(rows, cols, ()=> {
-      // awarding points after clear animation
-      let add = baseLinePoints * multiplier;
+        let baseLinePoints = total * POINT_LINE;
+        let multiplier = Math.max(1, total);
+        const perfect = (rows.length > 0 && cols.length > 0);
+        animateClear(rows, cols, ()=> {
+            let add = baseLinePoints * multiplier;
       if (perfect) add += PERFECT_BONUS;
       score += add;
-      // full clear?
-      if (isBoardEmpty()){
+            if (isBoardEmpty()){
         score += FULL_CLEAR_BONUS;
         showTransientText('+FULL ' + FULL_CLEAR_BONUS, '#ffd36b');
       }
-      // combo show
-      combo = (total >= 2) ? multiplier : 1;
+            combo = (total >= 2) ? multiplier : 1;
       COMBO_EL.innerText = 'x' + combo;
       updateScoreDisplay();
-      // change palette on clear
-      changePaletteRandom();
+            changePaletteRandom();
     });
   } else {
-    // no lines cleared -> reset combo
-    combo = 1;
+        combo = 1;
     COMBO_EL.innerText = 'x1';
     updateScoreDisplay();
   }
@@ -681,7 +636,7 @@ function tryPlaceAt(shape, r, c, pieceIndex){
   return true;
 }
 
-/* detect rows and cols fully filled */
+
 function detectLines(){
   const rows = [], cols = [], coords = new Set();
   for(let r=0;r<ROWS;r++){
@@ -701,25 +656,22 @@ function detectLines(){
   return { rows, cols, total: coords.size };
 }
 
-/* animate clear: show explosion on cells then clear from grid */
+
 function animateClear(rows, cols, cb){
   const coords = new Set();
   rows.forEach(r=>{ for(let c=0;c<COLS;c++) coords.add(`${r},${c}`); });
   cols.forEach(c=>{ for(let r=0;r<ROWS;r++) coords.add(`${r},${c}`); });
 
-  // explode visuals & spawn particles
-  coords.forEach(s=>{
+    coords.forEach(s=>{
     const [r,c] = s.split(',').map(Number);
     const el = BOARD.children[r*COLS + c];
     if (el){
       el.classList.add('explode');
-      // spawn small particle burst at cell center
-      spawnParticlesAtCell(r,c, 18, currentPalette.block);
+            spawnParticlesAtCell(r,c, 18, currentPalette.block);
     }
   });
 
-  // after animation clear actual cells
-  setTimeout(()=>{
+    setTimeout(()=>{
     coords.forEach(s=>{
       const [r,c] = s.split(',').map(Number);
       const el = BOARD.children[r*COLS + c];
@@ -731,18 +683,17 @@ function animateClear(rows, cols, cb){
   }, 360);
 }
 
-/* check full board empty */
+
 function isBoardEmpty(){
   for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++) if (grid[r][c]===1) return false;
   return true;
 }
 
-/* -------------------- PARTICLES -------------------- */
+
 function spawnParticlesAtCell(r,c, count=12, color='#ffd36b'){
   const cell = BOARD.children[r*COLS + c];
   if (!cell) return;
-  // compute center coordinates relative to BOARD
-  const rect = BOARD.getBoundingClientRect();
+    const rect = BOARD.getBoundingClientRect();
   const cellRect = cell.getBoundingClientRect();
   const cx = cellRect.left + cellRect.width/2 - rect.left;
   const cy = cellRect.top + cellRect.height/2 - rect.top;
@@ -763,12 +714,10 @@ function spawnParticlesAtCell(r,c, count=12, color='#ffd36b'){
     p.style.filter = 'blur(0.6px)';
     PARTICLE_LAYER.appendChild(p);
 
-    // random velocity
-    const angle = Math.random()*Math.PI*2;
+        const angle = Math.random()*Math.PI*2;
     const speed = 20 + Math.random()*50;
     const dx = Math.cos(angle)*speed;
-    const dy = Math.sin(angle)*speed - (Math.random()*40); // bias up
-    const rot = (Math.random()*360);
+    const dy = Math.sin(angle)*speed - (Math.random()*40);     const rot = (Math.random()*360);
 
     p.animate([
       { transform: `translate(${0}px,${0}px) scale(1)`, opacity:1 },
@@ -779,8 +728,8 @@ function spawnParticlesAtCell(r,c, count=12, color='#ffd36b'){
   }
 }
 
-/* -------------------- CHECK GAME OVER -------------------- */
-/* Determine if any remaining piece can be placed anywhere */
+
+
 function canPlaceAnywhere(shape){
   for(let r=0;r<ROWS;r++){
     for(let c=0;c<COLS;c++){
@@ -801,19 +750,18 @@ function canPlaceAnywhere(shape){
   return false;
 }
 
-/* After every move or piece generation, call checkGameOver */
+
 function checkGameOver(){
   for(let i=0;i<pieces.length;i++){
     const p = pieces[i];
     if (!p || p.used || !p.shape || p.shape.length===0) continue;
     if (canPlaceAnywhere(p.shape)) return false;
   }
-  // none placeable -> game over
-  showGameOver();
+    showGameOver();
   return true;
 }
 
-/* -------------------- GAME OVER UI -------------------- */
+
 function showGameOver(){
   document.getElementById('goTitle').innerText = 'Game Over';
   document.getElementById('goMsg').innerText = 'Không còn ô nào để đặt. Chơi lại?';
@@ -826,7 +774,7 @@ function hideGameOver(){
   OVERLAY.setAttribute('aria-hidden','true');
 }
 
-/* -------------------- SCORE & UI -------------------- */
+
 function updateScoreDisplay(){
   SCORE_EL.innerText = score;
   if (score > best){
@@ -834,7 +782,7 @@ function updateScoreDisplay(){
   }
 }
 
-/* transient big text for bonuses */
+
 function showTransientText(text, color='#ffd36b'){
   const t = document.createElement('div');
   t.textContent = text;
@@ -847,7 +795,7 @@ function showTransientText(text, color='#ffd36b'){
   setTimeout(()=> t.remove(), 1200);
 }
 
-/* -------------------- PALETTE UTILS -------------------- */
+
 function changePaletteRandom(){
   const p = pick(PALETTES);
   applyPalette(p);
@@ -855,15 +803,15 @@ function changePaletteRandom(){
   setTimeout(()=> BOARD.classList.remove('flash'), 320);
 }
 
-/* -------------------- RENDER / INIT FUNCTIONS -------------------- */
-function renderPieces(){ /* re-rendered when pieces changes */ }
+
+function renderPieces(){  }
 function renderBoardAndPieces(){
   renderGrid();
   renderPieces();
   updateScoreDisplay();
 }
 
-/* initial build */
+
 function boot(){
   initGrid();
   buildBoardDOM();
@@ -874,7 +822,7 @@ function boot(){
   updateScoreDisplay();
 }
 
-/* -------------------- small helpers / finalize -------------------- */
+
 function renderGrid(){
   for(let r=0;r<ROWS;r++){
     for(let c=0;c<COLS;c++){
@@ -890,7 +838,7 @@ function renderGrid(){
   }
 }
 
-/* override renderPieces with full implementation */
+
 function renderPieces(){
   SLOTS.innerHTML = '';
   pieces.forEach((p, idx)=>{
@@ -933,7 +881,7 @@ function renderPieces(){
   });
 }
 
-/* -------------------- RESET / RESTART -------------------- */
+
 function resetGame(){
   grid = Array.from({length:ROWS}, ()=>Array(COLS).fill(0));
   score = 0; combo = 1;
@@ -945,7 +893,7 @@ function resetGame(){
   updateScoreDisplay();
 }
 
-/* -------------------- PLUG UI BUTTONS -------------------- */
+
 document.getElementById('btnPalette').addEventListener('click', ()=> changePaletteRandom());
 document.getElementById('btnTheme').addEventListener('click', ()=>{
   document.documentElement.classList.toggle('light');
@@ -958,9 +906,9 @@ document.getElementById('btnReset').addEventListener('click', ()=> resetGame());
 document.getElementById('btnRestart').addEventListener('click', ()=> { hideGameOver(); resetGame(); });
 document.getElementById('btnClose').addEventListener('click', ()=> { hideGameOver(); });
 
-/* -------------------- START -------------------- */
+
 boot();
 
 </script>
 </body>
-</html>
+</html> sửa vậy đúng không
